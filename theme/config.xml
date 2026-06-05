@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<theme>
+    <name>neuroexplora_v3</name>
+    <title>Neuro Explora v3</title>
+    <version>3.0</version>
+    <compatibility>4.0</compatibility>
+    <author>Custom Theme — Misión Cerebro</author>
+    <license>Creative Commons by-sa</license>
+    <license-url>http://creativecommons.org/licenses/by-sa/4.0/</license-url>
+    <description>Retro Cyberpunk dark theme for Neuro Explora v3. Full pixel typography, HUD cards, game intro screen, mission progress bar, terminal headings, and custom neuro icons. Dark background, pink/red accent colors (#ff5c7a), teal highlights (#00d4ff). Inspired by Misión Cerebro: Exploradores de la Mente.
+
+Fonts: Press Start 2P (Google Fonts, OFL), Share Tech Mono (Google Fonts, OFL), Inter (Rasmus Andersson, SIL OFL).
+iDevice icons by Google (https://fonts.google.com/icons), Apache License 2.0.</description>
+    <downloadable>1</downloadable>
+</theme>

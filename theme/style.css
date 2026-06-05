@@ -1,0 +1,1673 @@
+@charset "UTF-8";
+
+/* =====================================================
+   NEURO EXPLORA v3 — RETRO CYBERPUNK THEME
+   Misión Cerebro: Exploradores de la Mente
+   ===================================================== */
+
+/* ─── PIXEL / RETRO FONTS ─────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap');
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Inter"), url(fonts/Inter-Regular.woff2) format("woff2"),
+        url(fonts/Inter-Regular.woff) format("woff");
+}
+@font-face {
+    font-family: "Inter";
+    font-style: italic;
+    font-weight: 400;
+    src: local("Inter Italic"), url(fonts/Inter-Italic.woff2) format("woff2"),
+        url(fonts/Inter-Italic.woff) format("woff");
+}
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Inter Bold"), url(fonts/Inter-Bold.woff2) format("woff2"),
+        url(fonts/Inter-Bold.woff) format("woff");
+}
+@font-face {
+    font-family: "Inter";
+    font-style: italic;
+    font-weight: 700;
+    src: local("Inter Bold Italic"),
+        url(fonts/Inter-BoldItalic.woff2) format("woff2"),
+        url(fonts/Inter-BoldItalic.woff) format("woff");
+}
+
+/* ─── CSS VARIABLES / PALETA NEURO EXPLORA ──────────── */
+:root {
+    --ne-black:       #000000;
+    --ne-dark:        #05070d;
+    --ne-dark2:       #090b12;
+    --ne-dark3:       #0d0f1a;
+    --ne-panel:       #0f1120;
+    --ne-border:      #1a1d2e;
+    --ne-pink:        #ff5c7a;
+    --ne-pink-light:  #ff8fa3;
+    --ne-pink-glow:   rgba(255, 92, 122, 0.35);
+    --ne-pink-dim:    rgba(255, 92, 122, 0.12);
+    --ne-teal:        #00d4ff;
+    --ne-teal-dim:    rgba(0, 212, 255, 0.15);
+    --ne-yellow:      #ffcc00;
+    --ne-green:       #00ff88;
+    --ne-text:        #c8cdd8;
+    --ne-text-bright: #eef0f5;
+    --ne-font-pixel:  'Press Start 2P', monospace;
+    --ne-font-mono:   'Share Tech Mono', 'Courier New', monospace;
+    --ne-font-body:   "Inter", sans-serif;
+    --ne-radius:      6px;
+    --ne-glow:        0 0 8px var(--ne-pink-glow), 0 0 20px var(--ne-pink-glow);
+    --ne-glow-teal:   0 0 8px rgba(0,212,255,0.35), 0 0 20px rgba(0,212,255,0.2);
+    --ne-scanline:    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px);
+    --ne-grid-bg:     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M 40 0 L 0 0 0 40' fill='none' stroke='rgba(255,92,122,0.05)' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+/* ─── GLOBAL BODY ──────────────────────────────────── */
+body,
+.exe-content,
+body.exe-export {
+    font-family: var(--ne-font-body);
+    font-weight: 400;
+    color: var(--ne-text);
+    background-color: var(--ne-dark);
+    background-image: var(--ne-grid-bg);
+}
+
+body#tinymce {
+    font-family: var(--ne-font-body);
+    background-color: var(--ne-dark);
+    color: var(--ne-text);
+}
+
+/* Scanline overlay on page */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: var(--ne-scanline);
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+}
+
+/* ─── PAGE TITLE ──────────────────────────────────── */
+.page-title {
+    font-family: var(--ne-font-pixel);
+    font-weight: normal;
+    font-size: 0.7rem;
+    margin-top: 20px;
+    color: var(--ne-pink);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* ─── HEADER ──────────────────────────────────────── */
+.exe-scorm .page > header,
+.exe-epub .page > header,
+.exe-ims .page > header {
+    display: block !important;
+}
+
+.page > header {
+    position: fixed;
+    top: 4px;
+    right: 4px;
+    left: 4px;
+    z-index: 400;
+    height: 82px;
+    display: flex !important;
+    align-items: center;
+    background: var(--ne-dark2);
+    border-radius: var(--ne-radius);
+    border-bottom: 2px solid var(--ne-pink);
+    box-shadow: var(--ne-glow);
+}
+
+/* Header blinking corner indicator */
+.page > header::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 8px;
+    height: 8px;
+    background: var(--ne-pink);
+    border-radius: 50%;
+    animation: blink-dot 1.5s step-end infinite;
+}
+.page > header::after {
+    content: '■ SISTEMA ACTIVO';
+    position: absolute;
+    bottom: 4px;
+    left: 24px;
+    font-family: var(--ne-font-mono);
+    font-size: 0.55rem;
+    color: var(--ne-pink-light);
+    letter-spacing: 1px;
+    opacity: 0.5;
+}
+
+@keyframes blink-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Package title in header */
+.page > header .package-title,
+.siteNav-off .page > header .package-title,
+.exe-single-page .package-header .package-title {
+    padding-left: 80px;
+    width: calc(100% - 470px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--ne-pink-light);
+    margin: 0;
+    font-family: var(--ne-font-pixel);
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: var(--ne-glow);
+}
+
+.exe-content .package-title {
+    margin-bottom: .4em;
+    line-height: 1.2em;
+}
+
+.package-header:has(.package-subtitle) .package-title,
+.main-header:has(.package-subtitle) .package-title {
+    position: relative;
+    top: -10px;
+}
+
+.package-subtitle {
+    width: 100%;
+    position: absolute;
+    left: 30px;
+    bottom: -.2em;
+    font-size: .75em;
+    font-family: var(--ne-font-mono);
+    color: var(--ne-teal);
+    letter-spacing: 2px;
+}
+
+.exe-web-site .package-subtitle {
+    left: 80px;
+}
+
+.exe-content .package-title,
+.exe-single-page .package-header .package-title {
+    font-family: var(--ne-font-pixel);
+    font-size: 0.85rem;
+    text-align: left;
+    font-weight: normal;
+    color: var(--ne-pink);
+    letter-spacing: 2px;
+    text-shadow: var(--ne-glow);
+}
+
+/* SCORM/IMS/EPUB header titles */
+body.exe-scorm .package-title,
+body.exe-ims .package-title,
+body.exe-epub .package-title {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    font-family: var(--ne-font-pixel);
+    font-size: 0.55rem;
+    color: var(--ne-pink-light);
+    padding-left: 32px;
+    font-weight: normal;
+    letter-spacing: 2px;
+}
+
+body.exe-scorm .page-title,
+body.exe-ims .page-title,
+body.exe-epub .page-title {
+    padding: 0 32px;
+    position: absolute;
+    bottom: 5px;
+    color: var(--ne-pink);
+    font-family: var(--ne-font-pixel);
+    font-size: 0.55rem;
+    letter-spacing: 2px;
+}
+
+body.exe-scorm .package-subtitle,
+body.exe-ims .package-subtitle,
+body.exe-epub .package-subtitle {
+    top: 28px;
+    font-size: .75em;
+    left: 32px;
+    color: var(--ne-teal);
+}
+
+body.exe-scorm .page-counter,
+body.exe-ims .page-counter,
+body.exe-epub .page-counter {
+    position: absolute;
+    top: 15px;
+    right: 32px;
+    font-family: var(--ne-font-mono);
+    color: var(--ne-teal);
+    font-size: 0.8em;
+}
+
+/* ─── PAGE LAYOUT ──────────────────────────────────── */
+main header:not(#head) {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+}
+
+.exe-web-site main.page {
+    box-sizing: border-box;
+    width: 100%;
+    padding-left: 300px;
+    padding-bottom: 40px;
+    transition: padding 0.3s ease;
+}
+
+body.exe-export {
+    padding: 1em 0;
+    background: var(--ne-dark);
+}
+
+body.exe-web-site {
+    padding: 0;
+    background: var(--ne-dark);
+    background-image: var(--ne-grid-bg);
+}
+
+/* ─── HEADINGS — TERMINAL STYLE ────────────────────── */
+h1, h2, h3, h4, h5, h6,
+.exe-content h1,
+.exe-content h2,
+.exe-content h3 {
+    font-family: var(--ne-font-pixel) !important;
+    color: var(--ne-pink) !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: normal;
+    text-shadow: var(--ne-glow);
+    line-height: 1.6;
+}
+
+h1, .exe-content h1 { font-size: 1.1rem !important; }
+h2, .exe-content h2 { font-size: 0.85rem !important; }
+h3, .exe-content h3 { font-size: 0.7rem !important; }
+h4, h5, h6 { font-size: 0.6rem !important; color: var(--ne-teal) !important; }
+
+/* Terminal prefix on H2 */
+h2::before,
+.exe-content h2::before {
+    content: '> ';
+    color: var(--ne-teal);
+    opacity: 0.7;
+    font-family: var(--ne-font-mono);
+    animation: blink-dot 1s step-end infinite;
+}
+
+/* ─── LINKS ────────────────────────────────────────── */
+.exe-content a {
+    color: var(--ne-teal);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+    transition: all 0.2s ease;
+}
+
+.exe-content a:hover,
+.exe-content a:focus {
+    color: var(--ne-pink);
+    border-bottom-color: var(--ne-pink);
+    text-shadow: var(--ne-glow);
+    text-decoration: none;
+}
+
+/* ─── SITE NAV ─────────────────────────────────────── */
+#siteNav {
+    float: left;
+    width: 290px;
+    padding-top: 16px;
+    padding-left: 8px;
+    padding-bottom: 16px;
+    background-color: var(--ne-dark2);
+    border: 1px solid var(--ne-border);
+    border-right: 2px solid var(--ne-pink);
+    box-shadow: 4px 0 20px rgba(255,92,122,0.1);
+    height: calc(100vh - 98px);
+    z-index: 1;
+    scrollbar-width: none;
+    transition: left 0.3s ease;
+    overflow: visible;
+    margin-top: 94px;
+    margin-left: 4px;
+    margin-bottom: 4px;
+    border-radius: var(--ne-radius);
+}
+
+#siteNav::before {
+    content: '[ MISIONES ]';
+    display: block;
+    font-family: var(--ne-font-mono);
+    font-size: 0.65rem;
+    color: var(--ne-pink);
+    letter-spacing: 3px;
+    padding: 8px 12px 12px 12px;
+    border-bottom: 1px solid var(--ne-border);
+    margin-bottom: 8px;
+    opacity: 0.8;
+}
+
+#siteNav::-webkit-scrollbar { display: none; }
+
+#siteNav > ul {
+    max-height: 100%;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+}
+#siteNav > ul::-webkit-scrollbar { display: none; }
+#siteNav .other-section { display: none; }
+
+#sidebar-nav.fixed,
+#sidebar-nav { position: fixed; }
+
+body.siteNav-off #siteNav { display: none; }
+
+.exe-web-site #siteFooter {
+    padding-left: 320px;
+    padding-right: 20px;
+    transition: padding 0.3s ease;
+}
+
+body.siteNav-off main.page,
+body.siteNav-off #siteFooter {
+    padding-left: 0;
+}
+
+#siteNav ul, #siteNav li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#siteNav li { margin-bottom: 2px; }
+
+#siteNav a {
+    color: var(--ne-text);
+    display: block;
+    padding: 8px 12px;
+    border-radius: 4px;
+    max-width: 280px;
+    font-family: var(--ne-font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.5px;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+#siteNav a::before {
+    content: '▸ ';
+    color: var(--ne-pink);
+    opacity: 0;
+    font-size: 0.7rem;
+    transition: opacity 0.2s;
+}
+
+#siteNav a:hover::before,
+#siteNav a.active::before {
+    opacity: 1;
+}
+
+#siteNav a.active {
+    color: var(--ne-pink);
+    background-color: var(--ne-pink-dim);
+    border-left-color: var(--ne-pink);
+    font-weight: bold;
+    box-shadow: inset 0 0 10px var(--ne-pink-glow);
+    text-shadow: 0 0 6px rgba(255,92,122,0.5);
+}
+
+#siteNav a.highlighted-link {
+    color: var(--ne-text);
+    margin-top: 8px;
+    background: rgba(0,212,255,0.05) url(img/book.svg) no-repeat 8px center;
+    padding-left: 38px;
+    border-left: 3px solid var(--ne-teal);
+}
+
+#siteNav a.highlighted-link.active {
+    background: rgba(0,212,255,0.15) url(img/book_color.svg) no-repeat 8px center !important;
+    color: var(--ne-teal);
+    border-left-color: var(--ne-teal);
+}
+
+#siteNav a.highlighted-link:hover,
+#siteNav a.highlighted-link:focus {
+    background-color: rgba(0,212,255,0.1) !important;
+    color: var(--ne-teal);
+}
+
+#siteNav a:hover {
+    background: var(--ne-pink-dim);
+    border-left-color: var(--ne-pink);
+    color: var(--ne-pink-light);
+    text-decoration: none;
+}
+
+#siteNav ul ul a {
+    padding-left: 30px;
+    font-size: 0.78em;
+    background-color: rgba(255,92,122,0.05);
+    border-left: 3px solid rgba(255,92,122,0.2);
+}
+
+.current-page-parent a {
+    background-color: rgba(255,92,122,0.05);
+    margin-bottom: 2px;
+}
+
+#siteNav ul ul ul a {
+    padding-left: 46px;
+    font-size: 0.75em;
+}
+
+#siteNav ul ul ul ul a { padding-left: 60px; }
+
+.daddy {
+    background: var(--ne-dark2) url(img/arrow_down.svg) no-repeat right 14px center / 18px !important;
+    filter: hue-rotate(300deg) saturate(1.5);
+}
+.active .active.daddy {
+    background: var(--ne-pink-dim) url(img/arrow_up_white.svg) no-repeat right 14px center / 18px !important;
+}
+.active .daddy {
+    background: rgba(255,92,122,0.05) url(img/arrow_down.svg) no-repeat right 14px center / 18px !important;
+}
+.current-page-parent .daddy {
+    background: rgba(255,92,122,0.05) url(img/arrow_down.svg) no-repeat right 14px center / 18px !important;
+}
+.daddy:hover {
+    background: var(--ne-pink-dim) url(img/arrow_down_white.svg) no-repeat right 14px center / 18px !important;
+    filter: none;
+}
+
+/* ─── MISSION PROGRESS BAR ──────────────────────────── */
+#siteNav::after {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    height: 3px;
+    background: var(--ne-border);
+    border-radius: 2px;
+}
+
+/* ─── NAV BUTTONS (SIGUIENTE / ANTERIOR) ──────────── */
+/*
+ * Separated from `button.toggler` to prevent mutual style bleed.
+ * The nav buttons show an SVG icon + text label.
+ * background-position is set per -left / -right sub-classes.
+ */
+.nav-buttons .nav-button {
+    position: fixed;
+    top: 15px;
+    right: 65px;
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+    height: 52px;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    background-color: var(--ne-pink);
+    border-radius: 4px;
+    z-index: 999;
+    border: 1px solid var(--ne-pink);
+    transition: all 0.2s ease;
+    padding: 0 20px;
+    color: var(--ne-black);
+    font-family: var(--ne-font-mono);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    box-shadow: var(--ne-glow);
+    text-transform: uppercase;
+    text-decoration: none;
+    line-height: 1;
+}
+
+.nav-buttons span.nav-button {
+    opacity: 0.3;
+    filter: grayscale(1);
+    cursor: not-allowed;
+}
+
+/* ANTERIOR — icon on the left */
+.nav-buttons .nav-button-left {
+    background-image: url(img/arrow_back.svg);
+    background-position: left 12px center;
+    padding-left: 42px;
+    padding-right: 18px;
+    right: 166px;
+    background-color: var(--ne-dark3);
+    color: var(--ne-pink);
+    border-color: var(--ne-pink);
+}
+
+/* SIGUIENTE — icon on the right */
+.nav-buttons .nav-button-right {
+    background-image: url(img/arrow_forward.svg);
+    background-position: right 12px center;
+    padding-right: 42px;
+    padding-left: 18px;
+    right: 20px;
+    background-color: var(--ne-pink);
+    color: var(--ne-black);
+}
+
+.nav-buttons a:hover,
+.nav-buttons a:focus {
+    background-color: var(--ne-pink-light);
+    border-color: var(--ne-pink-light);
+    color: var(--ne-black);
+    text-decoration: none;
+    box-shadow: 0 0 16px rgba(255,143,163,0.6);
+}
+
+/* ── toggler (separate from nav-button) ─────────────── */
+button.toggler {
+    position: fixed;
+    background-color: var(--ne-dark3);
+    border: 1px solid var(--ne-border);
+    border-radius: 4px;
+    z-index: 999;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+button.toggler:hover,
+button.toggler:focus {
+    background-color: var(--ne-pink-light);
+    border-color: var(--ne-pink-light);
+    color: var(--ne-black);
+    text-decoration: none;
+    box-shadow: 0 0 16px rgba(255,143,163,0.6);
+}
+
+/* Menu toggler */
+button#siteNavToggler {
+    left: 14px;
+    top: 17px;
+    background: var(--ne-dark3) url(img/menu_open.svg) no-repeat center center / 28px;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    box-sizing: content-box;
+    padding: 8px;
+    border: 1px solid var(--ne-border);
+    /* hue-rotate brings the white SVG into the pink palette */
+    filter: hue-rotate(300deg) saturate(2) brightness(1.5);
+}
+
+#siteNavToggler:hover {
+    background-color: var(--ne-pink-dim);
+    border-color: var(--ne-pink);
+}
+
+button#siteNavToggler span,
+.siteNav-off button#siteNavToggler span {
+    display: none;
+}
+
+body.siteNav-off button#siteNavToggler {
+    left: 14px;
+    top: 17px;
+    background: var(--ne-pink-dim) url(img/menu_closed.svg) no-repeat center center / 28px;
+    border-color: var(--ne-pink);
+    filter: none;
+}
+
+body.siteNav-off button#siteNavToggler:hover {
+    background-color: var(--ne-pink);
+    filter: none;
+}
+
+#siteNavToggler .sr-av {
+    visibility: visible;
+    position: static;
+    padding-left: 24px;
+    color: var(--ne-pink);
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: var(--ne-font-mono);
+}
+
+/* ─── CONTENT BOXES — HUD CARDS ─────────────────────── */
+.exe-content .box,
+.box {
+    background-color: var(--ne-panel);
+    border: 1px solid var(--ne-border);
+    border-radius: var(--ne-radius);
+    padding: 2rem;
+    margin-bottom: 28px;
+    position: relative;
+    transition: all 0.25s ease;
+    overflow: hidden;
+}
+
+/* Corner brackets — HUD effect */
+.exe-content .box::before,
+.box::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 20px;
+    height: 20px;
+    border-top: 2px solid var(--ne-pink);
+    border-left: 2px solid var(--ne-pink);
+    border-radius: var(--ne-radius) 0 0 0;
+    pointer-events: none;
+}
+
+.exe-content .box::after,
+.box::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    width: 20px;
+    height: 20px;
+    border-bottom: 2px solid var(--ne-pink);
+    border-right: 2px solid var(--ne-pink);
+    border-radius: 0 0 var(--ne-radius) 0;
+    pointer-events: none;
+}
+
+.exe-content .box:hover,
+.box:hover {
+    border-color: var(--ne-pink);
+    box-shadow: var(--ne-glow);
+    transform: translateY(-1px);
+}
+
+.exe-export .box { position: relative; }
+
+#node-content-container.exe-content .box {
+    border: 1px solid var(--ne-border);
+}
+
+#node-content-container.exe-content .box.hidden-idevices {
+    border-style: solid;
+    border-color: rgba(255,92,122,0.3);
+}
+
+/* Box header */
+.exe-content .box header {
+    min-height: 56px;
+    border-bottom: 1px solid var(--ne-border);
+}
+
+.exe-content .box-head {
+    border-bottom: 0;
+    margin-bottom: 16px !important;
+}
+
+.exe-content .box-head + .box-content {
+    padding-top: 1em;
+}
+
+.exe-content .box-head .box-title {
+    color: var(--ne-pink) !important;
+    font-family: var(--ne-font-pixel) !important;
+    font-size: 0.75rem !important;
+    font-weight: normal !important;
+    letter-spacing: 2px;
+    text-shadow: var(--ne-glow);
+    text-transform: uppercase;
+}
+
+.exe-content .box-head .exe-icon {
+    float: left;
+}
+
+#node-content-container.exe-content .box-head .exe-icon {
+    width: 56px;
+    height: 56px;
+    font-size: 36px;
+}
+
+#node-content-container.exe-content .box-head .exe-icon img {
+    height: 36px;
+    filter: hue-rotate(300deg) saturate(2) brightness(1.2);
+}
+
+/* Box toggle button */
+.exe-export .box-toggle {
+    width: 36px;
+    height: 36px;
+    background: url(img/arrow.svg);
+    background-size: auto 36px;
+    border-radius: 4px;
+    border: 1px solid var(--ne-border);
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    transition: transform 0.2s ease-in-out;
+    filter: hue-rotate(300deg) saturate(2) brightness(1.5);
+}
+
+.exe-export .minimized .box-toggle { transform: rotate(180deg); }
+
+/* ─── FEEDBACK / IDEVICE BORDERS ──────────────────── */
+.iDevice,
+.exe-figure,
+.feedback,
+.iDevice_content {
+    border: 1px solid rgba(255,92,122,0.4) !important;
+    box-shadow: 0 0 10px rgba(255,92,122,0.15);
+    border-radius: var(--ne-radius);
+    background-color: var(--ne-panel);
+}
+
+/* ─── BUTTONS ──────────────────────────────────────── */
+/*
+ * IMPORTANT: The selector is intentionally narrow.
+ * The old  `button, .button, input[type="submit"]`  rule targeted every
+ * button in the page — including the eXeLearning editor toolbar buttons
+ * (OPEN, PUSH, REFRESH, ×), the internal iDevice action buttons, and the
+ * navigation Anterior/Siguiente buttons — wiping out their icons and labels.
+ *
+ * We now restrict the pink theme ONLY to:
+ *   • iDevice action buttons  (.iDevice_buttons input / button)
+ *   • Generic content .button links inside .exe-content
+ *   • The exported submit input inside .exe-content
+ *
+ * Everything else (nav buttons, toggler, toolbar) keeps its own specific rules.
+ */
+
+/* iDevice buttons (Check, Show answer, etc.) */
+.exe-content .iDevice_buttons input,
+.exe-content .iDevice_buttons button {
+    background: var(--ne-pink) !important;
+    color: var(--ne-black) !important;
+    border: 1px solid var(--ne-pink) !important;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-family: var(--ne-font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 10px rgba(255,92,122,0.3);
+}
+
+/* Generic .button links / submit inside content */
+.exe-content .button,
+.exe-content input[type="submit"],
+.exe-export input[type="submit"] {
+    background: var(--ne-pink) !important;
+    color: var(--ne-black) !important;
+    border: 1px solid var(--ne-pink) !important;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-family: var(--ne-font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 10px rgba(255,92,122,0.3);
+}
+
+/* Hover / focus states — same narrow scope */
+.exe-content .iDevice_buttons input:hover,
+.exe-content .iDevice_buttons input:focus,
+.exe-content .iDevice_buttons button:hover,
+.exe-content .iDevice_buttons button:focus {
+    background: var(--ne-pink-light) !important;
+    border-color: var(--ne-pink-light) !important;
+    box-shadow: 0 0 20px rgba(255,143,163,0.5) !important;
+    transform: translateY(-1px);
+}
+
+.exe-content .button:hover,
+.exe-content .button:focus,
+.exe-content input[type="submit"]:hover,
+.exe-export input[type="submit"]:hover {
+    background: var(--ne-pink-light) !important;
+    border-color: var(--ne-pink-light) !important;
+    box-shadow: 0 0 20px rgba(255,143,163,0.5) !important;
+    transform: translateY(-1px);
+}
+
+/* ── Editor / preview toolbar isolation ─────────────────
+   Ensure NO pink bleeds into the eXeLearning authoring UI.
+   These selectors target the preview toolbar buttons that
+   appear OUTSIDE .exe-content and .exe-export.            */
+body:not(.exe-export):not(.exe-web-site) button:not(.toggler):not(#siteNavToggler):not(#searchBarTogger):not(.nav-button):not(.box-toggle) {
+    /* Let the editor keep its own styles — reset any inherited pink */
+    background: revert;
+    color: revert;
+    border: revert;
+    box-shadow: revert;
+    font-family: revert;
+    font-size: revert;
+    font-weight: revert;
+    letter-spacing: revert;
+    text-transform: revert;
+    padding: revert;
+    transform: revert;
+}
+
+/* ── iDevice authoring header buttons (EDITAR, ↑ ↓ ✕ etc.) ──
+   These are the icon-only action buttons on each iDevice card
+   in the eXeLearning editor. They must NEVER inherit the pink
+   background — their icons are SVG/font inside the button.     */
+.iDevice > header button,
+.iDevice > .iDevice-header button,
+[class*="iDevice"] > header button,
+[class*="iDevice"] .iDevice-toolbar button,
+.block-idevice-options button,
+.iDevice-edit button {
+    background: revert !important;
+    color: revert !important;
+    border: revert !important;
+    box-shadow: revert !important;
+    font-family: revert !important;
+    font-size: revert !important;
+    font-weight: revert !important;
+    letter-spacing: revert !important;
+    text-transform: revert !important;
+    padding: revert !important;
+    transform: revert !important;
+}
+
+/* ─── FX EFFECTS ──────────────────────────────────── */
+.exe-accordion .fx-accordion-title,
+.fx-pagination .fx-current a {
+    background-color: var(--ne-pink);
+    color: var(--ne-black);
+    font-family: var(--ne-font-mono);
+}
+
+.exe-fx a {
+    color: var(--ne-teal);
+}
+
+.exe-fx a:hover,
+.exe-fx a:focus {
+    color: var(--ne-pink);
+}
+
+/* ─── DOWNLOAD LINK ────────────────────────────────── */
+.exe-download-package-link a {
+    background: var(--ne-pink);
+    color: var(--ne-black);
+    font-family: var(--ne-font-mono);
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 8px 20px;
+    border-radius: 4px;
+    border: 1px solid var(--ne-pink);
+    transition: all 0.2s;
+}
+
+.exe-download-package-link a:hover {
+    background-color: var(--ne-pink-light);
+    color: var(--ne-black);
+    box-shadow: var(--ne-glow);
+    text-decoration: none;
+}
+
+/* ─── NODE CONTENT ─────────────────────────────────── */
+#node-content-container.exe-content #node-content {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: block;
+}
+
+.exe-web-site .page-content,
+#exe-client-search,
+.exe-web-site main > header,
+.exe-web-site #siteFooterContent,
+.exe-export .exe-content {
+    max-width: 1280px;
+    padding: 0 80px;
+    margin: 0 auto;
+}
+
+.exe-web-site .exe-content {
+    max-width: none;
+    padding: 0;
+}
+
+body.exe-export.exe-scorm { padding: 0; }
+
+.exe-export main { padding-top: 1.5em; }
+.exe-scorm .exe-export main { padding-top: 5em; padding-bottom: 1em; }
+.exe-web-site main { padding-top: 6em; }
+
+.exe-export main { padding-top: 6em; }
+
+body.exe-export.exe-scorm .exe-content,
+body.exe-export.exe-ims .exe-content,
+body.exe-export.exe-epub .exe-content {
+    padding: 0 40px;
+}
+
+.exe-content.cover-on .exe-interactive-video,
+.exe-content .exe-interactive-video {
+    width: 100%;
+}
+
+.exe-single-page .package-node { margin-bottom: 3.5em; }
+
+/* ─── SKIP NAV ─────────────────────────────────────── */
+#skipNav:focus { top: 15px; }
+
+/* ─── PAGE COUNTER ─────────────────────────────────── */
+.page-counter {
+    text-align: right;
+    margin: 0 0 0.5em 0;
+    font-size: 0.8em;
+    color: var(--ne-teal);
+    font-family: var(--ne-font-mono);
+    font-weight: 300;
+}
+
+.exe-web-site .page-counter {
+    position: fixed;
+    right: 346px;
+    margin: 0;
+    padding: 0;
+    font-size: 0.8em;
+    color: var(--ne-teal);
+    text-align: right;
+    font-family: var(--ne-font-mono);
+}
+
+/* ─── LICENSES ─────────────────────────────────────── */
+#packageLicense {
+    text-align: left;
+    font-size: 0.85em;
+    color: rgba(200,205,216,0.5);
+    line-height: 1em;
+    margin: 2.5em 0 2em 0;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    font-family: var(--ne-font-mono);
+}
+
+#packageLicense p { margin: 0; }
+
+#packageLicense a {
+    color: rgba(200,205,216,0.5);
+    text-transform: capitalize;
+    display: inline-block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    overflow: hidden;
+    line-height: 15px;
+}
+
+#packageLicense a:hover,
+#packageLicense a:focus {
+    text-decoration: none;
+    color: var(--ne-pink);
+}
+
+#packageLicense.propietary {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    height: 0;
+}
+
+#packageLicense.cc {
+    padding: 0 20px 0 90px;
+    background: url(img/licenses.gif) no-repeat 0 0;
+    filter: hue-rotate(300deg) saturate(0.5) brightness(0.7);
+}
+#packageLicense.cc-by-sa { background-position: 0 -100px; }
+#packageLicense.cc-by-nc { background-position: 0 -300px; }
+#packageLicense.cc-by-nc-sa { background-position: 0 -400px; }
+#packageLicense.cc-by-nc-nd { background-position: 0 -500px; }
+#packageLicense.cc-0 { background-position: 0 -600px; }
+
+/* ─── SEARCH BAR ────────────────────────────────────── */
+body.siteNav-off.exe-search-on button#searchBarTogger,
+body.exe-search-on button#searchBarTogger {
+    display: inline-block;
+}
+
+#exe-client-search-form p {
+    margin-top: 2em;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 6px;
+}
+
+button#searchBarTogger {
+    right: auto;
+    left: 304px;
+    top: 136px;
+    background: var(--ne-pink) url(img/search.svg) no-repeat center / 28px;
+    width: 48px;
+    height: 48px;
+    display: none;
+    border-radius: 0 4px 4px 0;
+    border: none;
+    box-shadow: none;
+}
+
+#exe-client-search {
+    display: none;
+    margin-bottom: 30px;
+}
+
+#exe-client-search-text {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: inline;
+    background: var(--ne-dark3);
+    border: 1px solid var(--ne-border);
+    color: var(--ne-text);
+    padding: 8px 12px;
+    font-family: var(--ne-font-mono);
+}
+
+#exe-client-search-submit {
+    text-indent: -999em;
+    background: var(--ne-pink) url(img/icons.png) no-repeat -41px -1px;
+    background-size: auto 40px;
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 4px;
+}
+
+#exe-client-search-reset.visible {
+    background: url(img/icons.png) no-repeat -242px -1px;
+    background-size: auto 40px;
+    width: 38px;
+    height: 38px;
+    display: inline-block;
+    vertical-align: middle;
+    opacity: 0.6;
+    border-radius: 4px;
+}
+
+#exe-client-search-reset:hover,
+#exe-client-search-reset:focus { opacity: 1; }
+
+#exe-client-search-submit:hover,
+#exe-client-search-submit:focus { background-color: var(--ne-pink-light); }
+
+#exe-client-search-results-list ul,
+#exe-client-search-results-list li {
+    margin: 2em 0;
+    padding: 0;
+    list-style: none;
+}
+#exe-client-search-results-list li { margin: 0 0 1em 0; }
+#exe-client-search-results-list p { margin-top: 2em; }
+
+/* Misc utility */
+#exe-client-search-reset span,
+#packageLicense .license-label {
+    position: absolute;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+}
+.box-toggle span { display: none; }
+
+/* ─── TEACHER MODE ──────────────────────────────────── */
+#teacher-mode-toggler-wrapper {
+    float: none;
+    position: absolute;
+    top: 9px;
+    right: 300px;
+    display: flex;
+    align-items: center;
+    padding: 4px 36px 4px 4px;
+    margin: 0 10px 0 0;
+    height: 64px;
+    background-image: url(img/teacher_hat.svg);
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 26px;
+    filter: hue-rotate(300deg) saturate(2) brightness(1.2);
+}
+
+#teacher-mode-toggler-wrapper .form-check-label {
+    position: absolute;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+#teacher-mode-toggler-wrapper .form-check-input {
+    width: 2.6em;
+    height: 1.4em;
+    background-color: var(--ne-dark3);
+    border-color: var(--ne-border);
+}
+
+#teacher-mode-toggler-wrapper .form-check-input:checked {
+    background-color: var(--ne-pink);
+    border-color: var(--ne-pink);
+}
+
+#teacher-mode-toggler-wrapper .form-check-input:focus {
+    border-color: var(--ne-pink);
+    box-shadow: 0 0 0 0.25rem rgba(255, 92, 122, 0.25);
+}
+
+/* ─── SITE FOOTER ───────────────────────────────────── */
+#siteUserFooter { margin-bottom: 20px; }
+
+#siteFooter {
+    background: var(--ne-dark2);
+    border-top: 1px solid var(--ne-border);
+    padding: 20px;
+    font-family: var(--ne-font-mono);
+    font-size: 0.8rem;
+    color: rgba(200,205,216,0.4);
+}
+
+/* ─── TABLES ────────────────────────────────────────── */
+table {
+    display: table;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100% !important;
+    border-collapse: collapse;
+}
+
+table th {
+    background: var(--ne-pink-dim);
+    color: var(--ne-pink);
+    font-family: var(--ne-font-mono);
+    border: 1px solid var(--ne-border);
+    padding: 8px 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.8em;
+}
+
+table td {
+    border: 1px solid var(--ne-border);
+    padding: 8px 12px;
+    color: var(--ne-text);
+}
+
+table tr:hover td {
+    background: rgba(255,92,122,0.04);
+}
+
+/* ─── SCORM/IMS HEADER FIXES ────────────────────────── */
+.exe-scorm .page > header .package-title,
+.exe-scorm .siteNav-off .page > header .package-title,
+.exe-ims .page > header .package-title,
+.exe-ims .siteNav-off .page > header .package-title,
+.exe-epub .page > header .package-title,
+.exe-epub .siteNav-off .page > header .package-title {
+    width: 100%;
+}
+
+.exe-single-page .package-header .package-title {
+    padding-left: 30px;
+}
+
+body.exe-scorm:has(.package-subtitle) .page-title,
+body.exe-ims:has(.package-subtitle) .page-title,
+body.exe-epub:has(.package-subtitle) .page-title {
+    margin-top: 30px;
+    color: var(--ne-pink);
+}
+
+body.exe-scorm #teacher-mode-toggler-wrapper,
+body.exe-ims #teacher-mode-toggler-wrapper,
+body.exe-epub #teacher-mode-toggler-wrapper {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+body.exe-single-page #teacher-mode-toggler-wrapper {
+    position: fixed;
+    top: 0;
+    right: 20px;
+    z-index: 1000;
+}
+
+body.exe-scorm .package-title,
+body.exe-ims .package-title,
+body.exe-epub .package-title {
+    top: 15px !important;
+}
+
+body.exe-scorm:has(.package-subtitle) .package-title {
+    top: 10px !important;
+}
+
+body.exe-scorm:has(.package-subtitle) .page-title,
+body.exe-ims:has(.package-subtitle) .page-title {
+    bottom: 0;
+}
+
+/* ─── ANIMATIONS ────────────────────────────────────── */
+@keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 1px); }
+    40% { transform: translate(2px, -1px); }
+    60% { transform: translate(-1px, 2px); }
+    80% { transform: translate(1px, -2px); }
+}
+
+@keyframes scanline-sweep {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+}
+
+@keyframes pulse-border {
+    0%, 100% { border-color: var(--ne-pink); box-shadow: var(--ne-glow); }
+    50% { border-color: var(--ne-pink-light); box-shadow: 0 0 20px rgba(255,143,163,0.5); }
+}
+
+/* Hover glitch on headings */
+h1:hover, h2:hover {
+    animation: glitch 0.3s steps(1) infinite;
+}
+
+/* ─── MISSION PROGRESS BAR ───────────────────────────── */
+.ne-progress-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--ne-dark2);
+    z-index: 500;
+    border-top: 1px solid var(--ne-border);
+}
+
+.ne-progress-bar .ne-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--ne-pink), var(--ne-teal));
+    box-shadow: 0 0 8px var(--ne-pink-glow);
+    transition: width 0.4s ease;
+}
+
+/* ─── RESPONSIVE ────────────────────────────────────── */
+@media (max-width: 1440px) {
+    .siteNav-off button#siteNavToggler span { display: none; }
+}
+
+@media (max-width: 1024px) {
+    .nav-buttons .nav-button span { display: none; }
+    .nav-buttons .nav-button { height: 52px; }
+    .nav-buttons .nav-button-right { right: 20px; background-position: center; }
+    .nav-buttons .nav-button-left { right: 90px; background-position: center; }
+    .page > header .package-title,
+    .siteNav-off .page > header .package-title { width: calc(100% - 240px); }
+    .exe-web-site .page-counter { left: auto; right: 80px; }
+    .page-counter-label { display: none; }
+    #teacher-mode-toggler-wrapper { right: 182px; }
+    .exe-web-site .page-counter { right: 180px; }
+    .exe-teacher-mode-toggler.exe-web-site .page-counter { right: 290px; }
+}
+
+@media (max-width: 750px) {
+    .exe-web-site .page-content { padding: 0 20px; }
+    .exe-web-site .package-subtitle { left: 32px; }
+
+    #sidebar-nav {
+        position: static !important;
+        width: 100%;
+        padding: 190px 0 0 0;
+    }
+
+    #siteNav {
+        float: none;
+        width: 100%;
+        margin: 0;
+        background-color: var(--ne-dark2);
+        height: auto;
+        padding: 16px 16px 8px 16px;
+        border-radius: 0;
+    }
+
+    #siteNav a { width: 100%; max-width: none; }
+
+    button#siteNavToggler {
+        right: 16px;
+        left: 16px;
+        top: 120px;
+        border-radius: var(--ne-radius);
+        width: auto;
+        padding: 16px;
+        height: 20px;
+        border: 1px solid var(--ne-border);
+        background: var(--ne-dark3) url(img/menu_open.svg) no-repeat 12px center / 28px;
+        font-weight: 700;
+        position: absolute;
+        z-index: 0;
+        filter: hue-rotate(300deg) saturate(2) brightness(1.5);
+    }
+
+    button#siteNavToggler span {
+        display: block;
+        color: var(--ne-pink);
+        overflow: visible;
+        width: auto;
+        height: auto;
+        text-align: left;
+        padding-left: 44px;
+        font-family: var(--ne-font-mono);
+    }
+
+    .exe-web-site main.page { padding-left: 0; padding-top: 0; }
+
+    body.siteNav-off button#siteNavToggler {
+        right: 16px;
+        left: 16px;
+        top: 120px;
+        border-radius: var(--ne-radius);
+        width: auto;
+        padding: 16px;
+        height: 20px;
+        background: var(--ne-pink-dim) url(img/menu_closed.svg) no-repeat 12px / 28px;
+        border-color: var(--ne-pink);
+        font-weight: 700;
+        filter: none;
+    }
+
+    body.siteNav-off button#siteNavToggler span {
+        color: var(--ne-pink);
+        text-align: left;
+        padding-left: 44px;
+        width: auto;
+        height: auto;
+        display: block;
+    }
+
+    body.siteNav-off main.page,
+    body.siteNav-off #siteFooter { padding: 0; }
+
+    .exe-web-site .exe-content .box { margin-top: 20px; }
+
+    .page > header,
+    .siteNav-off .page > header { background: var(--ne-dark2); }
+
+    .page > header .package-title,
+    .siteNav-off .page > header .package-title { width: calc(100% - 210px); }
+
+    #siteNavToggler .sr-av { color: var(--ne-pink); padding-left: 44px; }
+}
+
+@media (max-width: 650px) {
+    html { font-size: 0.85rem !important; }
+
+    .page > header .package-title,
+    .siteNav-off .page > header .package-title {
+        padding-left: 20px;
+        width: calc(100% - 155px);
+        font-size: 0.45rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: auto;
+        white-space: normal;
+        word-wrap: break-word;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .nav-buttons .nav-button-left,
+    .nav-buttons .nav-button-right {
+        height: 38px;
+        width: 38px;
+        padding: 0;
+        top: 30px;
+    }
+    .nav-buttons .nav-button-left { right: 60px; }
+}
+
+/* ─── PRINT ─────────────────────────────────────────── */
+@media print {
+    html body.exe-export { background: #fff; }
+    .exe-content { color: #000; padding: 0; }
+    @page { margin: 1.5cm; }
+    #packageLicense.cc { background: none; padding-left: 0; }
+    .exe-export .box-toggle { display: none; }
+    .exe-web-site #siteNav,
+    .exe-web-site .nav-buttons,
+    .exe-web-site button.toggler { display: none; }
+    .exe-web-site #siteFooter,
+    .exe-web-site main.page { padding-left: 0; padding-right: 0; }
+    .exe-web-site main.page { padding-top: 1em; }
+    body.exe-single-page #teacher-mode-toggler-wrapper { display: none; }
+    body::before { display: none; }
+    .ne-progress-bar { display: none; }
+}
+
+/* ─── COVER PAGE / GAME INTRO SCREEN ──────────────── */
+.exe-content .cover-page,
+.exe-content .exe-cover {
+    background: var(--ne-black) !important;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Portada title treatment */
+.exe-content .cover-page h1,
+body.exe-export .exe-content h1:first-of-type {
+    font-family: var(--ne-font-pixel) !important;
+    font-size: 1.4rem !important;
+    color: var(--ne-pink) !important;
+    text-shadow: 0 0 20px rgba(255,92,122,0.8), 0 0 40px rgba(255,92,122,0.4) !important;
+    letter-spacing: 4px;
+    animation: glitch 8s steps(1) infinite;
+}
+
+/* ─── SPECIAL CALLOUTS ──────────────────────────────── */
+.exe-content blockquote {
+    border-left: 3px solid var(--ne-pink);
+    background: var(--ne-pink-dim);
+    margin: 1.5em 0;
+    padding: 1em 1.5em;
+    font-family: var(--ne-font-mono);
+    color: var(--ne-pink-light);
+    border-radius: 0 var(--ne-radius) var(--ne-radius) 0;
+    font-size: 0.9em;
+}
+
+.exe-content blockquote::before {
+    content: '// ';
+    opacity: 0.5;
+}
+
+/* Code blocks */
+.exe-content code,
+.exe-content pre {
+    background: var(--ne-dark3);
+    border: 1px solid var(--ne-border);
+    color: var(--ne-teal);
+    font-family: var(--ne-font-mono);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+.exe-content pre {
+    padding: 1em;
+    overflow-x: auto;
+    border-left: 3px solid var(--ne-teal);
+}
+
+/* ─── ICON TINTING ──────────────────────────────────── */
+.exe-icon img,
+.box-icon img {
+    filter: hue-rotate(300deg) saturate(2) brightness(1.2);
+}
+
+/* ─── SINGLE PAGE EXTRAS ────────────────────────────── */
+.exe-single-page .package-header {
+    background: var(--ne-dark2);
+    border-bottom: 2px solid var(--ne-pink);
+    box-shadow: var(--ne-glow);
+}
+
+/* ─── MISC HEADER OVERRIDES ─────────────────────────── */
+body.siteNav-off button#searchBarTogger {
+    top: 136px;
+    left: 0px;
+    padding-left: 50px;
+    border-radius: 0 4px 4px 0;
+    display: none;
+}
+
+.exe-web-site .page > header {
+    display: flex !important;
+}
+
+/* Input styling */
+input[type="text"],
+input[type="search"],
+input[type="email"],
+select,
+textarea {
+    background: var(--ne-dark3) !important;
+    border: 1px solid var(--ne-border) !important;
+    color: var(--ne-text) !important;
+    font-family: var(--ne-font-mono);
+    border-radius: 4px;
+    padding: 8px 12px;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="search"]:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--ne-pink) !important;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255,92,122,0.15) !important;
+}
+
+/* ─── TEACHER MODE TOGGLER ──────────────────────────── */
+body.exe-scorm #teacher-mode-toggler-wrapper,
+body.exe-ims #teacher-mode-toggler-wrapper,
+body.exe-epub #teacher-mode-toggler-wrapper {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.exe-teacher-mode-toggler.exe-web-site .page-counter {
+    right: 400px;
+}
+
+@media (max-width: 750px) {
+    body.siteNav-off button#searchBarTogger,
+    body button#searchBarTogger {
+        left: auto;
+        right: 20px;
+        top: 120px;
+        height: 54px;
+        border-radius: var(--ne-radius);
+        width: 68px;
+        position: absolute;
+        z-index: 0;
+    }
+
+    #exe-client-search-form p {
+        height: 54px;
+        margin-top: 1em;
+    }
+
+    .exe-web-site #siteFooter #siteFooterContent { padding: 0; }
+    .exe-web-site #siteFooter { padding: 0 20px !important; }
+    #packageLicense { margin: 0 0 3em 0; }
+
+    .page > header .package-title,
+    .siteNav-off .page > header .package-title,
+    .exe-single-page .package-header .package-title {
+        padding-left: 32px;
+    }
+}
+
+@media (max-width: 650px) {
+    #teacher-mode-toggler-wrapper { right: 120px; }
+    .exe-web-site.exe-teacher-mode-toggler .page > header .package-title,
+    .exe-web-site.exe-teacher-mode-toggler.siteNav-off .page > header .package-title {
+        width: calc(100% - 260px);
+    }
+    .exe-web-site .page-counter { right: 127px; }
+    .exe-teacher-mode-toggler.exe-web-site .page-counter { right: 210px; }
+}
+
+/* ─── MISSION STATUS BAR — BOTTOM ───────────────────── */
+body.exe-web-site::after {
+    content: '▶ NEURO EXPLORA   //   MISIÓN ACTIVA   //   NIVEL: EXPLORADOR   //   ';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 24px;
+    background: var(--ne-dark2);
+    border-top: 1px solid var(--ne-border);
+    color: rgba(255,92,122,0.5);
+    font-family: var(--ne-font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    line-height: 24px;
+    padding: 0 12px;
+    z-index: 300;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+}
+
+/* ─── COVER PORTADA BOX — GAME STYLE ─────────────────── */
+.page-content > .box:first-child {
+    background: var(--ne-black);
+    border: 2px solid var(--ne-pink);
+    box-shadow: var(--ne-glow), inset 0 0 40px rgba(255,92,122,0.06);
+    animation: pulse-border 3s ease infinite;
+}
+
+/* ─── ACCENT SCROLLBAR ──────────────────────────────── */
+::-webkit-scrollbar { width: 6px; background: var(--ne-dark2); }
+::-webkit-scrollbar-thumb { background: var(--ne-pink); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ne-pink-light); }
+
+/* Selection */
+::selection {
+    background: var(--ne-pink);
+    color: var(--ne-black);
+}
