@@ -1,0 +1,254 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Share+Tech+Mono&display=swap');
+:root{--ne-dark:#05070d;--ne-dark2:#090b12;--ne-dark3:#0d0f1a;--ne-panel:#0f1120;--ne-border:#1a1d2e;--ne-pink:#ff5c7a;--ne-pink-light:#ff8fa3;--ne-pink-glow:rgba(255,92,122,0.35);--ne-pink-dim:rgba(255,92,122,0.12);--ne-teal:#00d4ff;--ne-teal-dim:rgba(0,212,255,0.15);--ne-yellow:#ffcc00;--ne-green:#00ff88;--ne-text:#c8cdd8;--ne-text-bright:#eef0f5;--ne-font-pixel:'Press Start 2P',monospace;--ne-font-mono:'Share Tech Mono','Courier New',monospace;--ne-radius:6px;--ne-glow:0 0 8px var(--ne-pink-glow),0 0 20px var(--ne-pink-glow);--ne-glow-teal:0 0 8px rgba(0,212,255,0.35),0 0 20px rgba(0,212,255,0.2);--ne-glow-green:0 0 8px rgba(0,255,136,0.35);--ne-scanline:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.08) 2px,rgba(0,0,0,0.08) 4px);--ne-grid-bg:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M 40 0 L 0 0 0 40' fill='none' stroke='rgba(255,92,122,0.05)' stroke-width='1'/%3E%3C/svg%3E")}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--ne-font-mono);background:var(--ne-dark);background-image:var(--ne-grid-bg);color:var(--ne-text);min-height:100vh;padding:24px}
+body::before{content:'';position:fixed;inset:0;background:var(--ne-scanline);pointer-events:none;z-index:9999;opacity:0.4}
+.ne-idevice{background:var(--ne-panel);border:1px solid var(--ne-border);border-radius:var(--ne-radius);padding:2rem;max-width:860px;margin:0 auto;position:relative;overflow:hidden}
+.ne-idevice::before{content:'';position:absolute;top:-1px;left:-1px;width:22px;height:22px;border-top:2px solid var(--ne-green);border-left:2px solid var(--ne-green);border-radius:var(--ne-radius) 0 0 0}
+.ne-idevice::after{content:'';position:absolute;bottom:-1px;right:-1px;width:22px;height:22px;border-bottom:2px solid var(--ne-green);border-right:2px solid var(--ne-green);border-radius:0 0 var(--ne-radius) 0}
+.ne-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,255,136,0.1);border:1px solid var(--ne-green);border-radius:4px;padding:3px 10px;font-family:var(--ne-font-pixel);font-size:0.45rem;color:var(--ne-green);letter-spacing:1.5px;margin-bottom:1rem}
+.ne-badge svg{width:10px;height:10px;stroke:var(--ne-green)}
+.ne-idevice-header{display:flex;align-items:center;gap:14px;margin-bottom:1.4rem;padding-bottom:1rem;border-bottom:1px solid var(--ne-border)}
+.ne-icon-wrap{width:52px;height:52px;flex-shrink:0;background:rgba(0,255,136,0.1);border:1px solid var(--ne-green);border-radius:var(--ne-radius);display:flex;align-items:center;justify-content:center;box-shadow:var(--ne-glow-green)}
+.ne-icon-wrap svg{width:26px;height:26px;stroke:var(--ne-green)}
+.ne-idevice-title{font-family:var(--ne-font-pixel);font-size:0.62rem;color:var(--ne-green);text-shadow:var(--ne-glow-green);letter-spacing:2px;text-transform:uppercase;line-height:1.8}
+.ne-idevice-sub{font-size:0.78rem;color:rgba(200,205,216,0.7);letter-spacing:1px;margin-top:4px}
+.intro-text{font-size:0.9rem;line-height:1.7;color:var(--ne-text);margin-bottom:1.4rem}
+.intro-text strong{color:var(--ne-text-bright)}
+.section-title{font-family:var(--ne-font-pixel);font-size:0.48rem;letter-spacing:2px;text-transform:uppercase;margin:0 0 1rem;color:var(--ne-text-bright)}
+.habits-two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.6rem}
+@media(max-width:560px){.habits-two-col{grid-template-columns:1fr}}
+.habits-col-good{background:rgba(0,255,136,0.06);border:1px solid rgba(0,255,136,0.25);border-radius:var(--ne-radius);padding:1.2rem}
+.habits-col-bad{background:rgba(255,92,122,0.06);border:1px solid rgba(255,92,122,0.25);border-radius:var(--ne-radius);padding:1.2rem}
+.col-header{display:flex;align-items:center;gap:8px;margin-bottom:1rem}
+.col-header svg{width:16px;height:16px}
+.col-title{font-family:var(--ne-font-pixel);font-size:0.45rem;letter-spacing:1.5px;text-transform:uppercase}
+.col-title.good{color:var(--ne-green)}
+.col-title.bad{color:var(--ne-pink)}
+.habit-info-item{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.83rem;line-height:1.5;cursor:pointer;border-radius:4px;transition:background 0.15s}
+.habit-info-item:last-child{border-bottom:none}
+.habit-info-item:hover{background:rgba(255,255,255,0.03);padding-left:4px}
+.habit-item-icon{width:18px;height:18px;flex-shrink:0;margin-top:2px}
+.habit-info-text{color:var(--ne-text)}
+.habit-info-text strong{color:var(--ne-text-bright)}
+.habit-why{display:none;font-size:0.78rem;color:rgba(200,205,216,0.7);margin-top:4px;padding-top:4px;border-top:1px dashed rgba(255,255,255,0.08);line-height:1.5}
+.habit-why.show{display:block}
+/* DND */
+.dnd-section{background:var(--ne-dark3);border:1px solid var(--ne-green);border-radius:var(--ne-radius);padding:1.6rem;margin-bottom:1.4rem;position:relative}
+.dnd-section::before{content:'[ ACTIVIDAD: CLASIFICA LOS HÁBITOS ]';font-family:var(--ne-font-pixel);font-size:0.42rem;color:var(--ne-green);letter-spacing:2px;position:absolute;top:-10px;left:16px;background:var(--ne-dark3);padding:0 6px;text-shadow:var(--ne-glow-green)}
+.dnd-instructions{font-size:0.85rem;color:var(--ne-text);margin-bottom:1.2rem;margin-top:4px;line-height:1.5}
+.dnd-bank{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;background:var(--ne-dark2);border:1px dashed var(--ne-border);border-radius:4px;padding:10px;margin-bottom:1.2rem}
+.dnd-bank.drag-over{border-color:var(--ne-teal);background:var(--ne-teal-dim)}
+.dnd-zones{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.2rem}
+@media(max-width:480px){.dnd-zones{grid-template-columns:1fr}}
+.dnd-zone{min-height:140px;border-radius:4px;padding:10px;border:1px dashed;transition:all 0.2s}
+.dnd-zone.zone-good{border-color:rgba(0,255,136,0.4);background:rgba(0,255,136,0.04)}
+.dnd-zone.zone-bad{border-color:rgba(255,92,122,0.4);background:rgba(255,92,122,0.04)}
+.dnd-zone.drag-over.zone-good{background:rgba(0,255,136,0.12);border-color:var(--ne-green)}
+.dnd-zone.drag-over.zone-bad{background:rgba(255,92,122,0.12);border-color:var(--ne-pink)}
+.zone-label{display:flex;align-items:center;gap:6px;font-family:var(--ne-font-pixel);font-size:0.4rem;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.zone-label svg{width:13px;height:13px}
+.zone-label.good{color:var(--ne-green)}
+.zone-label.good svg{stroke:var(--ne-green)}
+.zone-label.bad{color:var(--ne-pink)}
+.zone-label.bad svg{stroke:var(--ne-pink)}
+.zone-items{display:flex;flex-wrap:wrap;gap:6px;min-height:60px}
+.habit-chip{background:var(--ne-panel);border:1px solid var(--ne-border);border-radius:4px;padding:6px 12px;font-family:var(--ne-font-mono);font-size:0.82rem;color:var(--ne-text);cursor:grab;user-select:none;transition:all 0.2s;display:flex;align-items:center;gap:6px;touch-action:none}
+.habit-chip svg{width:13px;height:13px;stroke:var(--ne-text);flex-shrink:0}
+.habit-chip:hover{border-color:var(--ne-teal);color:var(--ne-teal)}
+.habit-chip:hover svg{stroke:var(--ne-teal)}
+.habit-chip.dragging{opacity:0.5;cursor:grabbing}
+.habit-chip.correct{border-color:var(--ne-green);background:rgba(0,255,136,0.1);color:var(--ne-green)}
+.habit-chip.correct svg{stroke:var(--ne-green)}
+.habit-chip.wrong{border-color:var(--ne-pink);background:rgba(255,92,122,0.1);color:var(--ne-pink);animation:shake 0.4s ease}
+.habit-chip.wrong svg{stroke:var(--ne-pink)}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.dnd-buttons{display:flex;gap:10px;flex-wrap:wrap}
+.dnd-btn{background:var(--ne-green);color:#000;border:none;border-radius:4px;padding:8px 20px;font-family:var(--ne-font-mono);font-size:0.85rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:6px}
+.dnd-btn svg{width:14px;height:14px;stroke:#000}
+.dnd-btn:hover{background:#33ffaa;box-shadow:var(--ne-glow-green);transform:translateY(-1px)}
+.dnd-btn.secondary{background:var(--ne-dark2);color:var(--ne-text);border:1px solid var(--ne-border)}
+.dnd-btn.secondary svg{stroke:var(--ne-text)}
+.dnd-btn.secondary:hover{border-color:var(--ne-pink);color:var(--ne-pink);box-shadow:none;transform:none}
+.dnd-btn.secondary:hover svg{stroke:var(--ne-pink)}
+.dnd-score{display:none;margin-top:1rem;padding:1rem;border-radius:4px;font-size:0.88rem;line-height:1.6}
+.dnd-score.show{display:block}
+.ne-statusbar{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--ne-dark2);border:1px solid var(--ne-border);border-radius:4px;margin-top:1rem;font-family:var(--ne-font-mono);font-size:0.7rem;color:rgba(200,205,216,0.5)}
+.ne-statusbar .status-dot{width:7px;height:7px;background:var(--ne-green);border-radius:50%;animation:blink 1.2s step-end infinite}
+.ne-statusbar .status-label{font-family:var(--ne-font-pixel);font-size:0.38rem;color:var(--ne-green)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+</style>
+
+<div class="ne-idevice">
+  <div class="ne-idevice-header">
+    <div class="ne-icon-wrap">
+      <!-- book-open-01 -->
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+    </div>
+    <div>
+      <div class="ne-idevice-title">Hábitos de Estudio</div>
+      <div class="ne-idevice-sub">Pequeñas acciones que transforman tu aprendizaje</div>
+    </div>
+  </div>
+
+  <p class="intro-text">Los hábitos son comportamientos que el cerebro automatiza con la práctica. Un <strong>hábito de estudio positivo</strong> reduce el esfuerzo mental necesario para ponerse a estudiar y aumenta la efectividad de cada sesión.</p>
+
+  <div class="section-title">Haz clic en cada hábito para ver por qué importa:</div>
+  <div class="habits-two-col">
+    <div class="habits-col-good">
+      <div class="col-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--ne-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <span class="col-title good">Buenos hábitos</span>
+      </div>
+      <div class="habit-info-item" onclick="toggleWhy(this)">
+        <svg class="habit-item-icon" viewBox="0 0 24 24" fill="none" stroke="var(--ne-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <div><div class="habit-info-text"><strong>Planificar el estudio</strong></div><div class="habit-why">Distribuir el tiempo en sesiones planificadas reduce el estrés y permite que el cerebro consolide la información entre sesiones. Activa la corteza prefrontal y mejora la autorregulación.</div></div>
+      </div>
+      <div class="habit-info-item" onclick="toggleWhy(this)">
+        <svg class="habit-item-icon" viewBox="0 0 24 24" fill="none" stroke="var(--ne-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        <div><div class="habit-info-text"><strong>Organizar materiales</strong></div><div class="habit-why">Un entorno organizado reduce la carga cognitiva innecesaria. El cerebro no gasta energía buscando cosas y puede dedicar más recursos al aprendizaje real.</div></div>
+      </div>
+      <div class="habit-info-item" onclick="toggleWhy(this)">
+        <svg class="habit-item-icon" viewBox="0 0 24 24" fill="none" stroke="var(--ne-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+        <div><div class="habit-info-text"><strong>Repasar con regularidad</strong></div><div class="habit-why">La repetición espaciada refuerza las conexiones neuronales y mueve la información desde la memoria de trabajo a la memoria a largo plazo. Es la técnica más respaldada por la neurociencia.</div></div>
+      </div>
+      <div class="habit-info-item" onclick="toggleWhy(this)">
+        <svg class="habit-item-icon" viewBox="0 0 24 24" fill="none" stroke="var(--ne-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg>
+        <div><div class="habit-info-text"><strong>Hidratarse bien</strong></div><div class="habit-why">El cerebro es 75% agua. Incluso una deshidratación leve (1-2%) puede reducir la atención, la memoria y la capacidad de procesamiento.</div></div>
+      </div>
+      <div class="habit-info-item" onclick="toggleWhy(this)">
+        <svg class="habit-item-icon" viewBox="0 0 24 24" fill="none" stroke="var(--ne-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <div><div class="habit-info-text"><strong>Usar la técnica Pomodoro</strong></div><div class="habit-why">Estudiar en bloques de 25 min con descansos de 5 min respeta los ciclos de atención. Los descansos permiten que la información repose y favorecen la consolidación.</div></div>
+      </div>
+    </div>
+
+    <div class="habits-col-bad">
+      <div class="col-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--ne-pink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        <span class="col-title bad">Malos hábitos</span>
+      </div>
+      <div class="habit-info-item" onclick="toggleWhy(this)">
+        <svg class="habit-item-icon" viewBox="0 0 24 24" fill="none" stroke="var(--ne-pink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6.364 6.364 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
+        <div><div class="habit-info-text"><strong>Trasnochar estudiando</strong></div><div class="habit-why">La privación de sueño impide que el hipocampo consolide los recuerdos. El rendimiento cognitivo cae drásticamente después de la medianoche: estudias más pero aprendes menos.</div></div>
+      </div>
+      <div class="habit-info-item" onclick="toggleWhy(this)">
+        <svg class="habit-item-icon" viewBox="0 0 24 24" fill="none" stroke="var(--ne-pink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <div><div class="habit-info-text"><strong>Procrastinar</strong></div><div class="habit-why">Postergar el estudio activa el mismo circuito de alivio inmediato que las adicciones. Estudiar todo en el último momento satura la memoria de trabajo e impide la consolidación.</div></div>
+      </div>
+      <div class="habit-info-item" onclick="toggleWhy(this)">
+        <svg class="habit-item-icon" viewBox="0 0 24 24" fill="none" stroke="var(--ne-pink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3"/></svg>
+        <div><div class="habit-info-text"><strong>Estudiar con el celular</strong></div><div class="habit-why">Recuperar la concentración después de una distracción tarda en promedio 23 minutos. Tener el celular visible reduce el rendimiento incluso sin usarlo.</div></div>
+      </div>
+      <div class="habit-info-item" onclick="toggleWhy(this)">
+        <svg class="habit-item-icon" viewBox="0 0 24 24" fill="none" stroke="var(--ne-pink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <div><div class="habit-info-text"><strong>Solo releer los apuntes</strong></div><div class="habit-why">Releer da una falsa sensación de que "ya lo sé". Técnicas activas como autoevaluarse o enseñar a otros son 2-3 veces más efectivas que releer.</div></div>
+      </div>
+      <div class="habit-info-item" onclick="toggleWhy(this)">
+        <svg class="habit-item-icon" viewBox="0 0 24 24" fill="none" stroke="var(--ne-pink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        <div><div class="habit-info-text"><strong>Saltarse comidas</strong></div><div class="habit-why">El cerebro consume el 20% de la energía del cuerpo. Estudiar con hambre reduce la concentración, la memoria y la capacidad de resolver problemas.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DND -->
+  <div class="dnd-section">
+    <p class="dnd-instructions">Arrastra cada hábito a su columna correcta. Presiona "Verificar" cuando termines.</p>
+    <div class="dnd-bank" id="chipBank" ondragover="onDragOver(event)" ondrop="onDrop(event,'bank')" ondragleave="onDragLeave(event)"></div>
+    <div class="dnd-zones">
+      <div class="dnd-zone zone-good" id="zone-good" ondragover="onDragOver(event)" ondrop="onDrop(event,'good')" ondragleave="onDragLeave(event)">
+        <div class="zone-label good">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Buenos hábitos
+        </div>
+        <div class="zone-items" id="zone-good-items"></div>
+      </div>
+      <div class="dnd-zone zone-bad" id="zone-bad" ondragover="onDragOver(event)" ondrop="onDrop(event,'bad')" ondragleave="onDragLeave(event)">
+        <div class="zone-label bad">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          Malos hábitos
+        </div>
+        <div class="zone-items" id="zone-bad-items"></div>
+      </div>
+    </div>
+    <div class="dnd-score" id="dndScore"></div>
+    <div class="dnd-buttons">
+      <button class="dnd-btn" onclick="checkDnd()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        Verificar
+      </button>
+      <button class="dnd-btn secondary" onclick="resetDnd()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        Reiniciar
+      </button>
+    </div>
+  </div>
+
+  <div class="ne-statusbar">
+    <div style="display:flex;align-items:center;gap:8px"><div class="status-dot"></div><span>SISTEMA ACTIVO</span></div>
+    <span class="status-label">IDEVICE — HÁBITOS</span>
+    <span>MISIÓN 3 / 3</span>
+  </div>
+</div>
+
+<script>
+function toggleWhy(el) { el.querySelector('.habit-why').classList.toggle('show'); }
+
+// CHIP ICONS (Untitled UI SVG paths, inline)
+const chipIconGood = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
+const chipIconBad  = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`;
+
+const habits = [
+  {id:'h1',label:'Planificar el estudio',answer:'good'},{id:'h2',label:'Trasnochar',answer:'bad'},
+  {id:'h3',label:'Repasar regularmente',answer:'good'},{id:'h4',label:'Estudiar con el celular',answer:'bad'},
+  {id:'h5',label:'Organizar materiales',answer:'good'},{id:'h6',label:'Procrastinar',answer:'bad'},
+  {id:'h7',label:'Usar Pomodoro',answer:'good'},{id:'h8',label:'Solo releer apuntes',answer:'bad'},
+  {id:'h9',label:'Hidratarse bien',answer:'good'},{id:'h10',label:'Saltarse comidas',answer:'bad'},
+];
+let zoneMap = {bank:habits.map(h=>h.id),good:[],bad:[]};
+let draggedId = null;
+let touchChip = null, touchClone = null;
+
+function buildChips(targetEl, ids) {
+  targetEl.innerHTML='';
+  ids.forEach(id => {
+    const h = habits.find(x=>x.id===id); if(!h) return;
+    const chip = document.createElement('div');
+    chip.className='habit-chip'; chip.id='chip-'+h.id; chip.dataset.id=h.id; chip.draggable=true;
+    chip.innerHTML = (h.answer==='good'?chipIconGood:chipIconBad) + h.label;
+    chip.addEventListener('dragstart', e=>{ draggedId=h.id; chip.classList.add('dragging'); e.dataTransfer.setData('text/plain',h.id); });
+    chip.addEventListener('dragend', ()=>chip.classList.remove('dragging'));
+    chip.addEventListener('touchstart', touchStart, {passive:true});
+    chip.addEventListener('touchmove', touchMove, {passive:false});
+    chip.addEventListener('touchend', touchEnd);
+    targetEl.appendChild(chip);
+  });
+}
+function renderAll(){
+  buildChips(document.getElementById('chipBank'), zoneMap.bank);
+  buildChips(document.getElementById('zone-good-items'), zoneMap.good);
+  buildChips(document.getElementById('zone-bad-items'), zoneMap.bad);
+}
+function removeFromZones(id){ ['bank','good','bad'].forEach(z=>{ zoneMap[z]=zoneMap[z].filter(x=>x!==id); }); }
+function onDragOver(e){ e.preventDefault(); e.currentTarget.classList.add('drag-over'); }
+function onDragLeave(e){ e.currentTarget.classList.remove('drag-over'); }
+function onDrop(e,zone){ e.preventDefault(); e.currentTarget.classList.remove('drag-over'); const id=e.dataTransfer.getData('text/plain')||draggedId; if(!id) return; removeFromZones(id); zoneMap[zone].push(id); renderAll(); document.getElementById('dndScore').classList.remove('show'); }
+function touchStart(e){ touchChip=e.currentTarget; draggedId=touchChip.dataset.id; touchClone=touchChip.cloneNode(true); touchClone.style.cssText=`position:fixed;pointer-events:none;z-index:9998;opacity:0.85;transform:scale(1.05);left:${e.touches[0].clientX-touchChip.offsetWidth/2}px;top:${e.touches[0].clientY-20}px;`; document.body.appendChild(touchClone); }
+function touchMove(e){ e.preventDefault(); if(!touchClone) return; const t=e.touches[0]; touchClone.style.left=(t.clientX-touchClone.offsetWidth/2)+'px'; touchClone.style.top=(t.clientY-20)+'px'; }
+function touchEnd(e){ if(touchClone){touchClone.remove();touchClone=null;} if(!draggedId) return; const t=e.changedTouches[0]; const el=document.elementFromPoint(t.clientX,t.clientY); let zone='bank'; if(el){ if(el.closest('#zone-good')) zone='good'; else if(el.closest('#zone-bad')) zone='bad'; } removeFromZones(draggedId); zoneMap[zone].push(draggedId); draggedId=null; renderAll(); document.getElementById('dndScore').classList.remove('show'); }
+
+function checkDnd(){
+  if(zoneMap.good.length+zoneMap.bad.length < habits.length){ const s=document.getElementById('dndScore'); s.innerHTML='Clasifica todos los hábitos antes de verificar.'; s.style.cssText='background:rgba(255,204,0,0.08);border:1px solid var(--ne-yellow);color:var(--ne-yellow);border-radius:4px;padding:12px;'; s.classList.add('show'); return; }
+  let correct=0;
+  zoneMap.good.forEach(id=>{ const h=habits.find(x=>x.id===id); const c=document.getElementById('chip-'+id); if(h&&c){ if(h.answer==='good'){c.classList.add('correct');correct++;}else c.classList.add('wrong'); }});
+  zoneMap.bad.forEach(id=>{ const h=habits.find(x=>x.id===id); const c=document.getElementById('chip-'+id); if(h&&c){ if(h.answer==='bad'){c.classList.add('correct');correct++;}else c.classList.add('wrong'); }});
+  const pct=Math.round(correct/habits.length*100);
+  const s=document.getElementById('dndScore');
+  if(pct===100){ s.innerHTML=`<strong style="color:var(--ne-green)">¡Perfecto! ${correct}/${habits.length} correctos</strong> — Tienes muy claro qué hábitos favorecen el aprendizaje.`; s.style.cssText='background:rgba(0,255,136,0.08);border:1px solid var(--ne-green);color:var(--ne-green);border-radius:4px;padding:12px;'; }
+  else if(pct>=70){ s.innerHTML=`<strong style="color:var(--ne-teal)">Bien hecho: ${correct}/${habits.length}</strong> — Revisa los hábitos en rojo y lee la explicación haciendo clic sobre ellos.`; s.style.cssText='background:rgba(0,212,255,0.08);border:1px solid var(--ne-teal);color:var(--ne-teal);border-radius:4px;padding:12px;'; }
+  else { s.innerHTML=`<strong style="color:var(--ne-pink)">${correct}/${habits.length} correctos</strong> — Sigue practicando. Lee las explicaciones de cada hábito en la sección de arriba.`; s.style.cssText='background:rgba(255,92,122,0.08);border:1px solid var(--ne-pink);color:var(--ne-pink);border-radius:4px;padding:12px;'; }
+  s.classList.add('show');
+}
+function resetDnd(){ zoneMap={bank:habits.map(h=>h.id),good:[],bad:[]}; renderAll(); document.getElementById('dndScore').classList.remove('show'); }
+renderAll();
+</script>
